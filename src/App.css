@@ -32,7 +32,91 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
+}
+
+
+
+
+
+/* ======================================================================== */
+
+body{
+  background-color: #ccc;
+}
+
+.otp-login-container {
+  max-width: 400px;
+  margin: 0 auto;
+  margin-top: 100px;
+  padding: 20px;
+  border: 2px solid #000;
+  border-radius: 20px;
+  background-color: #fff;
+}
+
+.otp-login-container h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.form-group {
+  margin-bottom: 10px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+input[type="text"] {
+  width: 90%;
+  padding: 8px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.form-button {
+  display: flex;
+  justify-content: center;
+}
+
+.send-otp-btn,
+.verify-otp-btn {
+  display: block;
+  width: 50%;
+  padding: 10px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.send-otp-btn:hover,
+.verify-otp-btn:hover {
+  background-color: #0056b3;
+  border-radius: 50px;
+  width: 40%;
+}
+
+.send-otp-btn:active,
+.verify-otp-btn:active {
+  background-color: #004080;
+}
+
+.send-otp-btn:focus,
+.verify-otp-btn:focus {
+  outline: none;
+}
+
+.error-message {
+  color: red;
+  margin-top: 10px;
+  font-size: 14px;
 }
