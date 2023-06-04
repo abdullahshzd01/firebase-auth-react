@@ -1,10 +1,12 @@
 import '../App.css'
-import React, { useState, useEffect } from 'react';
-import firebase from 'firebase/compat/app';
+import React, { useState } from 'react';
+// import firebase from 'firebase/compat/app';
 import { getAuth, RecaptchaVerifier, signInWithPhoneNumber } from 'firebase/auth';
 // import 'firebase/compat/auth';
 // import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
 // import PhoneInput from 'react-phone-number-input';
+import "react-phone-number-input/style.css";
+import { initializeApp } from 'firebase/app';
 
 const firebaseConfig = {
     apiKey: "AIzaSyAlH2k5WWaEmJLfVaOM7gxVVEintra1Crs",
@@ -16,35 +18,48 @@ const firebaseConfig = {
     measurementId: "G-EXTXXEPFHW"
 };
 
-firebase.initializeApp(firebaseConfig);
+// const firebaseConfig = {
+//     apiKey: "AIzaSyBG9y80RPaIrYjSvJc6OJb0-szHm2M4Bkw",
+//     authDomain: "fir-authreact-e01cf.firebaseapp.com",
+//     projectId: "fir-authreact-e01cf",
+//     storageBucket: "fir-authreact-e01cf.appspot.com",
+//     messagingSenderId: "369091016259",
+//     appId: "1:369091016259:web:9d1cdbde2328fd8f6a06f6",
+//     measurementId: "G-0WXLGN1GJL"
+// };
 
-const auth = getAuth();
-auth.languageCode = 'it';
+// firebase.initializeApp(firebaseConfig);
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+export const auth = getAuth(app);
+// auth.languageCode = 'it';
 
 function setUpRecaptcha(number) {
     const verifier = new RecaptchaVerifier('recaptcha-container', {}, auth);
-
     verifier.render();
+
+    return signInWithPhoneNumber(auth, number, verifier);
 }
 
 const OTPLogin = () => {
     const [phoneNumber, setPhoneNumber] = useState('');
     const [otp, setOTP] = useState('');
-    const [verified, setVerified] = useState(false);
+    // const [verified, setVerified] = useState(false);
+    const [result, setResult] = useState("");
     // const [signInWithEmailAndPassword, user, loading, error] = useSignInWithEmailAndPassword(firebase.auth());
 
-    useEffect(() => {
-        if (verified) {
-            alert('OTP Verification successful!');
-        }
-    }, [verified]);
+    // useEffect(() => {
+    //     if (verified) {
+    //         alert('OTP Verification successful!');
+    //     }
+    // }, [verified]);
 
     const handlePhoneNumberChange = (e) => {
-        console.log(" ------------------------------------- ");
-        console.log("e: ", e);
+        // console.log(" ------------------------------------- ");
+        // console.log("e: ", e);
         setPhoneNumber(e.target.value);
-        console.log("handlePhoneNumberChange: ", phoneNumber);
-        console.log(" ------------------------------------- ");
+        // console.log("handlePhoneNumberChange: ", phoneNumber);
+        // console.log(" ------------------------------------- ");
     };
 
     const handleOTPChange = (e) => {
@@ -61,6 +76,11 @@ const OTPLogin = () => {
         try {
             const response = await setUpRecaptcha(phoneNumberWithCountryCode);
             console.log("response: ", response);
+            setResult(response);
+
+            if (response) {
+                alert("OTP sent!");
+            }
         } catch (error) {
             console.error("Error: ", error);
         }
@@ -98,35 +118,47 @@ const OTPLogin = () => {
             });
     };
 
-    const handleOTPVerification = () => {
-        // const credential = firebase.auth.PhoneAuthProvider.credential(window.confirmationResult.verificationId, otp);
+    const handleOTPVerification = async (e) => {
+        // // const credential = firebase.auth.PhoneAuthProvider.credential(window.confirmationResult.verificationId, otp);
 
-        // signInWithEmailAndPassword(credential)
-        //     .then((userCredential) => {
-        //         // User signed in successfully
-        //         const user = userCredential.user;
-        //         console.log('Logged in user:', user);
-        //     })
-        //     .catch((error) => {
-        //         console.log('Error signing in:', error);
-        //     });
+        // // signInWithEmailAndPassword(credential)
+        // //     .then((userCredential) => {
+        // //         // User signed in successfully
+        // //         const user = userCredential.user;
+        // //         console.log('Logged in user:', user);
+        // //     })
+        // //     .catch((error) => {
+        // //         console.log('Error signing in:', error);
+        // //     });
 
-        const code = otp;
+        // const code = otp;
 
-        window.confirmationResult.confirm(code).then((result) => {
-            // User signed in successfully.
-            const user = result.user;
+        // window.confirmationResult.confirm(code).then((result) => {
+        //     // User signed in successfully.
+        //     const user = result.user;
 
-            console.log("OTP verified!");
-            console.log(" => ", user);
+        //     console.log("OTP verified!");
+        //     console.log(" => ", user);
 
-            setVerified(true);
-            // ...
-        }).catch((error) => {
-            // User couldn't sign in (bad verification code?)
-            // ...
-            console.log("OTP verification error: ", error);
-        });
+        //     setVerified(true);
+        //     // ...
+        // }).catch((error) => {
+        //     // User couldn't sign in (bad verification code?)
+        //     // ...
+        //     console.log("OTP verification error: ", error);
+        // });
+
+
+        e.preventDefault();
+
+        if (otp === "" || otp === null) return;
+        try {
+            await result.confirm(otp);
+            // setVerified(true);
+            window.location.href = '/verfied';
+        } catch (err) {
+            console.error(err.message);
+        }
     };
 
     return (
