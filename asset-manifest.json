@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/firebase-auth-react/static/css/main.74e62675.css",
+    "main.css": "/firebase-auth-react/static/css/main.a9f852e2.css",
     "main.js": "/firebase-auth-react/static/js/main.acad433e.js",
     "static/js/787.bc7d429a.chunk.js": "/firebase-auth-react/static/js/787.bc7d429a.chunk.js",
     "index.html": "/firebase-auth-react/index.html",
-    "main.74e62675.css.map": "/firebase-auth-react/static/css/main.74e62675.css.map",
+    "main.a9f852e2.css.map": "/firebase-auth-react/static/css/main.a9f852e2.css.map",
     "main.acad433e.js.map": "/firebase-auth-react/static/js/main.acad433e.js.map",
     "787.bc7d429a.chunk.js.map": "/firebase-auth-react/static/js/787.bc7d429a.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.74e62675.css",
+    "static/css/main.a9f852e2.css",
     "static/js/main.acad433e.js"
   ]
 }
