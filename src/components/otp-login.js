@@ -67,7 +67,7 @@ const OTPLogin = () => {
     };
 
     const handleSignIn = async () => {
-        const phoneNumberWithCountryCode = `+92${phoneNumber}`; // Modify the country code as needed
+        const phoneNumberWithCountryCode = `${phoneNumber}`; // Modify the country code as needed
         const appVerifier = window.recaptchaVerifier;
 
         console.log("phone number: ", phoneNumberWithCountryCode);
@@ -169,7 +169,7 @@ const OTPLogin = () => {
                 <div className="form-group">
                     <label>
                         Phone Number:
-                        <input type="text" placeholder='3XXXXXXXXX' value={phoneNumber} onChange={handlePhoneNumberChange} />
+                        <input type="text" placeholder='+92333XXXXXXX' value={phoneNumber} onChange={handlePhoneNumberChange} />
                         {/* <PhoneInput defaultCountry='PK' placeholder="Enter your phone number" value={phoneNumber} onChange={handlePhoneNumberChange}/> */}
                     </label>
 
